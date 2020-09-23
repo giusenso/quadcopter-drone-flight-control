@@ -1,5 +1,23 @@
 # autonomous-drone
 
+Drone Configuration:
+```
+          Front
+     cw  (1) (2)  ccw      x
+           \ /           z ↑
+            X             \|
+           / \             +----→ y
+    ccw  (4) (3)  cw
+    
+```
+| Channel | Command  |
+|:-------:|:--------:|
+|    1    |   yaw    |
+|    2    |   pitch  |
+|    3    | throttle |
+|    4    |   roll   |
+
+
 ## Project Goals
 #### 1.  Non-autonomous Drone
 - [x] Define basic data structures and workflow
@@ -29,7 +47,7 @@
 - Propellers: Emax 1045
 - ESC: HAKRC 35A
 - MCU: ATmega 328 (Arduino Nano)
-- IMU: mpu9250+barometer, (10dof sensor)
+- IMU: mpu9250 + barometer (10dof sensor)
 - Lipo battery: 3S 5000mAh
 - Radio Tx: Flysky FS-i6X
 - Radio Rx: Flysky X6B
