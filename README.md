@@ -64,7 +64,7 @@ Drone Configuration:
 ## Technologies
 - Language: C/C++, Matlab
 - IDE: Visual Studio Code w\ PlatformIO
-- Libs: Arduino.h
+- Additional libs: Arduino.h
 
 ## Data Structures
 **drone** object:
