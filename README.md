@@ -1,6 +1,6 @@
 # autonomous-drone
 
-## table of contents
+## Table of contents
 * [Project overview](#project-overview)
 * [Roadmap](#roadmap)
 * [Hardware](#hardware)
