@@ -1,5 +1,14 @@
 # autonomous-drone
 
+## table of contents
+* [Project overview](#project-overview)
+* [Roadmap](#roadmap)
+* [Hardware](#hardware)
+* [Technologies](#technologies)
+* [Data Structures](#data-structures)
+
+## Project Overview
+
 Drone Configuration:
 ```
           Front
@@ -18,7 +27,7 @@ Drone Configuration:
 |    4    |   roll   |
 
 
-## Project Goals
+## Roadmap
 #### 1.  Non-autonomous Drone
 - [x] Define basic data structures and workflow
 - [x] Implement *Tx --> Rx* communication using interrups
@@ -52,6 +61,10 @@ Drone Configuration:
 - Radio Tx: Flysky FS-i6X
 - Radio Rx: Flysky X6B
 
+## Technologies
+- Language: C/C++, Matlab
+- IDE: Visual Studio Code w\ PlatformIO
+- Libs: Arduino.h
 
 ## Data Structures
 **drone** object:
