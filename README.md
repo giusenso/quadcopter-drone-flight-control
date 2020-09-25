@@ -30,6 +30,7 @@ Drone Configuration:
 ## Roadmap
 #### 1.  Non-autonomous Drone
 - [x] Define basic data structures and workflow
+- [x] pcb design
 - [x] Implement *Tx --> Rx* communication using interrups
 - [x] Map commands [*Throttle, Roll, Pitch, Yaw*] into motor signals [*m1, m2, m3, m4*] 
 - [x] Signal smoothening
