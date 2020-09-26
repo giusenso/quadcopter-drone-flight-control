@@ -38,9 +38,9 @@ Drone Configuration:
 - [ ] Testing
 
 #### 2.  Hovering
-- [ ] Read and store IMU data
-- [ ] Implement a real time PID algorithm
-- [ ] Implement a simple gyro-based hovering maneuver
+- [ ] Implement an IMU class for MPU9250
+- [x] Implement a PID class and algorithm
+- [ ] Implement a gyro-based hovering maneuver
 - [ ] Testing
 - [ ] Implement a real time Kalman Filter Algorithm
 - [ ] Implement a full hovering maneuver
@@ -68,25 +68,57 @@ Drone Configuration:
 - Additional libs: Arduino.h
 
 ## Data Structures
-**drone** object:
+**Drone** class in a nutshell:
 ```
 typedef struct drone{
     uint8_t state;
+
     int16_t av_throttle;
     int16_t av_roll;
     int16_t av_pitch;
     int16_t av_yaw;
+
     int16_t throttle[N];
     int16_t roll[N];
     int16_t pitch[N];
     int16_t yaw[N];
     int16_t ch5;
+
     float roll_coeff;
     float pitch_coeff;
     float yaw_coeff;
+
     uint16_t m1;
     uint16_t m2;
     uint16_t m3;
     uint16_t m4;
+
+    IMU* imu;   // imu data for control
+    PID* pid_x; // pid control on gyro_x
+    PID* pid_y; // pid control on gyro_y
 } drone;
+
+uint8_t drone_init(drone* d, float r_coeff, float p_coeff, float y_coeff, float Kp, float Ki, float Kd);
+uint8_t compute_motor_signal(drone* d);
+inline int16_t signal_average(int16_t* a);
+uint8_t update_needed(drone* d, drone* prev_d);
+void compute_control_action(drone* d);
+```
+
+
+**PID controller** class:
+```
+typedef struct PID{
+    float setpoint;
+    float Kp, Ki, Kd;
+    float dt;
+    float err[2];
+    float output[2];
+    float P, I, D;
+    float integral;
+    float min, max;
+}PID;
+
+void PID_init(PID* pid, float setpoint, float Kp, float Ki, float Kd);
+void PID_update(PID* pid, float data);
 ```
