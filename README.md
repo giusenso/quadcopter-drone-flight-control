@@ -27,12 +27,37 @@ Drone Configuration:
 |    4    |   roll   |
 
 
+Repository structure:
+```
+.
+├── include
+│   ├── atmega328_pin_mapping.h
+│   └── README
+├── lib
+│   ├── drone
+│   │   ├── drone.cpp
+│   │   └── drone.h
+│   ├── MPU9250
+│   │   ├── MPU9250.cpp
+│   │   └── MPU9250.h
+│   ├── PID
+│   │   ├── PID.cpp
+│   │   └── PID.h
+│   └── README
+├── platformio.ini
+├── README.md
+├── src
+│   └── main.cpp
+└── test
+    └── README
+```
+
 ## Roadmap
 #### 1.  Non-autonomous Drone
 - [x] Define basic data structures and workflow
 - [x] pcb design
 - [x] Implement *Tx --> Rx* communication using interrups
-- [x] Map commands [*Throttle, Roll, Pitch, Yaw*] into motor signals [*m1, m2, m3, m4*] 
+- [x] Map commands <*Throttle, Roll, Pitch, Yaw*> into motor signals <*m1, m2, m3, m4*> 
 - [x] Signal smoothening
 - [ ] Implement a safe arm/disarm routine
 - [ ] Testing
@@ -47,9 +72,7 @@ Drone Configuration:
 - [ ] Testing
 
 #### 3.  Other Autonomous Maneuver
-- [ ] Automatic landing and take-off
-- [ ] Trajectory tracking
-
+- [ ] Autonomous take-off and landing
 
 ## Hardware
 - Frame: S500 glass fiber 480mm
@@ -68,7 +91,7 @@ Drone Configuration:
 - Additional libs: Arduino.h
 
 ## Data Structures
-**Drone** class in a nutshell:
+**Drone**:
 ```
 typedef struct drone{
     uint8_t state;
@@ -98,15 +121,10 @@ typedef struct drone{
     PID* pid_y; // pid control on gyro_y
 } drone;
 
-uint8_t drone_init(drone* d, float r_coeff, float p_coeff, float y_coeff, float Kp, float Ki, float Kd);
-uint8_t compute_motor_signal(drone* d);
-inline int16_t signal_average(int16_t* a);
-uint8_t update_needed(drone* d, drone* prev_d);
-void compute_control_action(drone* d);
 ```
 
 
-**PID controller** class:
+**PID controller**:
 ```
 typedef struct PID{
     float setpoint;
@@ -119,6 +137,4 @@ typedef struct PID{
     float min, max;
 }PID;
 
-void PID_init(PID* pid, float setpoint, float Kp, float Ki, float Kd);
-void PID_update(PID* pid, float data);
 ```
