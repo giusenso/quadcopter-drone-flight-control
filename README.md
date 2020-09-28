@@ -1,11 +1,34 @@
 # autonomous-drone-flight-control
 
 ## Table of contents
-* [Roadmap](#roadmap)
 * [Project overview](#project-overview)
+* [Roadmap](#roadmap)
 * [Hardware](#hardware)
-* [Technologies](#technologies)
-* [Data Structures](#data-structures)
+* [Electronic Schematics](#electronic-schematics)
+* [Software](#software)
+
+## Project Overview
+
+... 
+
+**Drone Configuration**
+```
+          Front
+     cw  (1) (2)  ccw      x
+           \ /           z ↑
+            X             \|
+           / \             +----→ y
+    ccw  (4) (3)  cw
+    
+```
+| Channel | Command  |
+|:-------:|:--------:|
+|    1    |   yaw    |
+|    2    |   pitch  |
+|    3    | throttle |
+|    4    |   roll   |
+|    5    |   vra    |
+
 
 ## Roadmap
 #### 1.  Non-autonomous Drone
@@ -30,51 +53,19 @@
 - [ ] Autonomous take-off and landing
 
 
-## Project Overview
+## Hardware
+- Frame: S500 glass fiber 480mm
+- Motors: Emax 2216 810kv
+- Propellers: Emax 1045
+- ESC: HAKRC 35A
+- MCU: ATmega 328 (Arduino Nano)
+- IMU: mpu9250 + barometer (10dof sensor)
+- Lipo battery: 3S 5000mAh
+- Radio Tx: Flysky FS-i6X
+- Radio Rx: Flysky X6B
 
-**Repository structure**
-```
-.
-├── include
-│   ├── atmega328_pin_mapping.h
-│   └── README
-├── lib
-│   ├── drone
-│   │   ├── drone.cpp
-│   │   └── drone.h
-│   ├── MPU9250
-│   │   ├── MPU9250.cpp
-│   │   └── MPU9250.h
-│   ├── PID
-│   │   ├── PID.cpp
-│   │   └── PID.h
-│   └── README
-├── platformio.ini
-├── README.md
-├── src
-│   └── main.cpp
-└── test
-    └── README
-```
 
-**Drone Configuration**
-```
-          Front
-     cw  (1) (2)  ccw      x
-           \ /           z ↑
-            X             \|
-           / \             +----→ y
-    ccw  (4) (3)  cw
-    
-```
-| Channel | Command  |
-|:-------:|:--------:|
-|    1    |   yaw    |
-|    2    |   pitch  |
-|    3    | throttle |
-|    4    |   roll   |
-|    5    |   vra    |
-
+## Electronic schematics
 
 **Pin Mapping**
 ```
@@ -110,44 +101,60 @@
 | D11 |   PB3    | M1 |
 | D12 |   PB4    | Ch5 |
 
-             
-Power Bus:
+                 
+**Power Busses**
 ```
-                                     +---------+        +-----------+
-                                     | MPU9250 |        | Brushless |
-                                     +---+--+--+        |  Motors   |
-                                         |  |           +---+--+----+
-+----------+                             |  |               |  |
-|          |-------------- GND ----------+--|----+----------+  |
-|   LIPO   |----(buck)---- 3.3v ------------+    |             |
-|    3S    |----(buck)---- 7.3v -----------------|--+          |
-|          |------------ 11.1/12.6v -------------|--|----------+
-+----------+                                     |  |  
-                                                 |  |   
-                                             +---+--+---+ 
-                                             | Radio Rx | 
-                                             +----------+     
+                                 +---------+        +-----------+
+                                 | MPU9250 |        | Brushless |
+                                 +---+--+--+        |  Motors   |
+                                     |  |           +---+--+----+
++======+                             |  |               |  |
+|      |-------------- GND ----------+--|----+----------+  |
+| LIPO |----(buck)---- 3.3v ------------+    |             |
+|  3S  |----(buck)---- 7.3v -----------------|--+          |
+|      |------------ 11.1/12.6v -------------|--|----------+
++======+                                     |  |  
+                                             |  |   
+                                         +---+--+---+ 
+                                         | Radio Rx | 
+                                         +----------+     
 ```
 
 
-## Hardware
-- Frame: S500 glass fiber 480mm
-- Motors: Emax 2216 810kv
-- Propellers: Emax 1045
-- ESC: HAKRC 35A
-- MCU: ATmega 328 (Arduino Nano)
-- IMU: mpu9250 + barometer (10dof sensor)
-- Lipo battery: 3S 5000mAh
-- Radio Tx: Flysky FS-i6X
-- Radio Rx: Flysky X6B
-
-## Technologies
+## Software
 - Language: C/C++, Matlab
 - IDE: Visual Studio Code w\ PlatformIO
-- Additional libs: Arduino.h
+- Additional libs: Arduino.h, Servo.h
 
-## Data Structures
-**Drone**:
+
+**Repository structure**
+```
+.
+├── include
+│   ├── atmega328_pin_mapping.h
+│   └── README
+├── lib
+│   ├── drone
+│   │   ├── drone.cpp
+│   │   └── drone.h
+│   ├── MPU9250
+│   │   ├── MPU9250.cpp
+│   │   └── MPU9250.h
+│   ├── PID
+│   │   ├── PID.cpp
+│   │   └── PID.h
+│   └── README
+├── platformio.ini
+├── README.md
+├── src
+│   └── main.cpp
+└── test
+    └── README
+```
+
+**Data Structures**
+
+*Drone*:
 ```
 typedef struct drone{
     uint8_t state;
@@ -179,8 +186,7 @@ typedef struct drone{
 
 ```
 
-
-**PID controller**:
+*PID controller:*
 ```
 typedef struct PID{
     float setpoint;
