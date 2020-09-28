@@ -1,4 +1,4 @@
-# autonomous-drone-flight-control
+# Autonomous Drone Flight Control
 
 ## Table of contents
 * [Project overview](#project-overview)
