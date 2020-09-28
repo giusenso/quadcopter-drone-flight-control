@@ -1,11 +1,12 @@
 # Autonomous Drone Flight Control
 
 ## Table of contents
-* [Project overview](#project-overview)
+* [Project Overview](#project-overview)
 * [Roadmap](#roadmap)
 * [Hardware](#hardware)
 * [Electronic Schematics](#electronic-schematics)
 * [Software](#software)
+* [Control System](#control-system)
 
 ## Project Overview
 
@@ -203,3 +204,7 @@ typedef struct PID{
 }PID;
 
 ```
+
+## Control System
+Sketch of control system for *full hovering maneuver*:
+<img src="img/quadcopter_hovering_control_system.png"  width="800"  align="center">
