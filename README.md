@@ -68,6 +68,21 @@
 ## Electronic schematics
 
 **Pin Mapping**
+
+| Board Pin | Port Pin | Signal | Hardware |
+|:---:|:--------:|:-------:|:-------:|
+| A4  |   PC4    | SDA |      IMU  
+| A5  |   PC5    | SCL |      IMU
+| D3  |   PD3    | M4 |       Motor 4
+| D4  |   PD4    | Ch4 |      Radio Rx
+| D5  |   PD5    | Ch3 |      Radio Rx
+| D6  |   PD6    | Ch2 |      Radio Rx
+| D7  |   PD7    | Ch1 |      Radio Rx
+| D9  |   PB1    | M3 |       Motor 3
+| D10 |   PB2    | M2 |       Motor 2
+| D11 |   PB3    | M1 |       Motor 1
+| D12 |   PB4    | Ch5 |      Radio Rx
+
 ```
                        ATmega328
                     +--------------+           
@@ -88,20 +103,8 @@
           3.3v -----| VIN       Tx |
                     +--------------+
 ```
-| Pin |   Port   | Data |
-|:---:|:--------:|:-------:|
-| A4  |   PC4    | SDA |
-| A5  |   PC5    | SCL |
-| D4  |   PD4    | Ch4 |
-| D5  |   PD5    | Ch3 |
-| D6  |   PD6    | Ch2 |
-| D7  |   PD7    | Ch1 |
-| D9  |   PB1    | M3 |
-| D10 |   PB2    | M2 |
-| D11 |   PB3    | M1 |
-| D12 |   PB4    | Ch5 |
-
-                 
+   
+   
 **Power Busses**
 ```
                                  +---------+        +-----------+
