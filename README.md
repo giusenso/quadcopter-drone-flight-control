@@ -9,25 +9,7 @@
 
 ## Project Overview
 
-Drone Configuration:
-```
-          Front
-     cw  (1) (2)  ccw      x
-           \ /           z ↑
-            X             \|
-           / \             +----→ y
-    ccw  (4) (3)  cw
-    
-```
-| Channel | Command  |
-|:-------:|:--------:|
-|    1    |   yaw    |
-|    2    |   pitch  |
-|    3    | throttle |
-|    4    |   roll   |
-
-
-Repository structure:
+**Repository structure**
 ```
 .
 ├── include
@@ -51,6 +33,82 @@ Repository structure:
 └── test
     └── README
 ```
+
+**Drone Configuration**
+```
+          Front
+     cw  (1) (2)  ccw      x
+           \ /           z ↑
+            X             \|
+           / \             +----→ y
+    ccw  (4) (3)  cw
+    
+```
+| Channel | Command  |
+|:-------:|:--------:|
+|    1    |   yaw    |
+|    2    |   pitch  |
+|    3    | throttle |
+|    4    |   roll   |
+|    5    |   vra    |
+
+
+
+
+**Pin Mapping**
+| Pin |   Port   | Data |
+|:---:|:--------:|:-------:|
+| A4  |   PC4    | SDA |
+| A5  |   PC5    | SCL |
+| D4  |   PD4    | Ch4 |
+| D5  |   PD5    | Ch3 |
+| D6  |   PD6    | Ch2 |
+| D7  |   PD7    | Ch1 |
+| D9  |   PB1    | M3 |
+| D10 |   PB2    | M2 |
+| D11 |   PB3    | M1 |
+| D12 |   PB4    | Ch5 |
+
+```
+                       ATmega328
+                    +--------------+           
+                    | D13      D12 |<-------------|Ch5| (Radio Rx)
+                    | 3.3v     D11 |----> (M1)
+                    | Ref      D10 |----> (M2)
+                    | A0        D9 |----> (M3)
+                    | A1        D8 |
+                    | A2        D7 |<-------------|Ch1| (Radio Rx)
+                    | A3        D6 |<-------------|Ch2| (Radio Rx)
+(MPU9250) |SDA|---->| A4        D5 |<-------------|Ch3| (Radio Rx)
+(MPU9250) |SCL|---->| A5        D4 |<-------------|Ch4| (Radio Rx)
+                    | A6        D3 |----> (M4)
+                    | A7        D2 |
+                    | 5v       GND |
+                    | RST      RST |
+           GND -----| GND       Rx |
+          3.3v -----| VIN       Tx |
+                    +--------------+
+```       
+             
+Power Bus:
+```
+                                     +---------+        +-----------+
+                                     | MPU9250 |        | Brushless |
+                                     +---+--+--+        |  Motors   |
+                                         |  |           +---+--+----+
++----------+                             |  |               |  |
+|          |-------------- GND ----------+--|----+----------+  |
+|   LIPO   |----(buck)---- 3.3v ------------+    |             |
+|    3S    |----(buck)---- 7.3v -----------------|--+          |
+|          |------------ 11.1/12.6v -------------|--|----------+
++----------+                                     |  |  
+                                                 |  |   
+                                             +---+--+---+ 
+                                             | Radio Rx | 
+                                             +----------+     
+```
+
+
 
 ## Roadmap
 #### 1.  Non-autonomous Drone
