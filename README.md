@@ -1,11 +1,34 @@
 # autonomous-drone-flight-control
 
 ## Table of contents
-* [Project overview](#project-overview)
 * [Roadmap](#roadmap)
+* [Project overview](#project-overview)
 * [Hardware](#hardware)
 * [Technologies](#technologies)
 * [Data Structures](#data-structures)
+
+## Roadmap
+#### 1.  Non-autonomous Drone
+- [x] Define basic data structures and workflow
+- [x] pcb design
+- [x] Implement *Tx --> Rx* communication using interrups
+- [x] Map commands <*Throttle, Roll, Pitch, Yaw*> into motor signals <*m1, m2, m3, m4*> 
+- [x] Signal smoothening
+- [ ] Implement a safe arm/disarm routine
+- [ ] Testing
+
+#### 2.  Hovering
+- [ ] Implement an IMU class for MPU9250
+- [x] Implement a PID class and algorithm
+- [ ] Implement a gyro-based hovering maneuver
+- [ ] Testing
+- [ ] Implement a real time Kalman Filter Algorithm
+- [ ] Implement a full hovering maneuver
+- [ ] Testing
+
+#### 3.  Other Autonomous Maneuver
+- [ ] Autonomous take-off and landing
+
 
 ## Project Overview
 
@@ -53,22 +76,7 @@
 |    5    |   vra    |
 
 
-
-
 **Pin Mapping**
-| Pin |   Port   | Data |
-|:---:|:--------:|:-------:|
-| A4  |   PC4    | SDA |
-| A5  |   PC5    | SCL |
-| D4  |   PD4    | Ch4 |
-| D5  |   PD5    | Ch3 |
-| D6  |   PD6    | Ch2 |
-| D7  |   PD7    | Ch1 |
-| D9  |   PB1    | M3 |
-| D10 |   PB2    | M2 |
-| D11 |   PB3    | M1 |
-| D12 |   PB4    | Ch5 |
-
 ```
                        ATmega328
                     +--------------+           
@@ -88,7 +96,20 @@
            GND -----| GND       Rx |
           3.3v -----| VIN       Tx |
                     +--------------+
-```       
+```
+| Pin |   Port   | Data |
+|:---:|:--------:|:-------:|
+| A4  |   PC4    | SDA |
+| A5  |   PC5    | SCL |
+| D4  |   PD4    | Ch4 |
+| D5  |   PD5    | Ch3 |
+| D6  |   PD6    | Ch2 |
+| D7  |   PD7    | Ch1 |
+| D9  |   PB1    | M3 |
+| D10 |   PB2    | M2 |
+| D11 |   PB3    | M1 |
+| D12 |   PB4    | Ch5 |
+
              
 Power Bus:
 ```
@@ -108,29 +129,6 @@ Power Bus:
                                              +----------+     
 ```
 
-
-
-## Roadmap
-#### 1.  Non-autonomous Drone
-- [x] Define basic data structures and workflow
-- [x] pcb design
-- [x] Implement *Tx --> Rx* communication using interrups
-- [x] Map commands <*Throttle, Roll, Pitch, Yaw*> into motor signals <*m1, m2, m3, m4*> 
-- [x] Signal smoothening
-- [ ] Implement a safe arm/disarm routine
-- [ ] Testing
-
-#### 2.  Hovering
-- [ ] Implement an IMU class for MPU9250
-- [x] Implement a PID class and algorithm
-- [ ] Implement a gyro-based hovering maneuver
-- [ ] Testing
-- [ ] Implement a real time Kalman Filter Algorithm
-- [ ] Implement a full hovering maneuver
-- [ ] Testing
-
-#### 3.  Other Autonomous Maneuver
-- [ ] Autonomous take-off and landing
 
 ## Hardware
 - Frame: S500 glass fiber 480mm
