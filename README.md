@@ -207,4 +207,4 @@ typedef struct PID{
 
 ## Control System
 Sketch of control system for *full hovering maneuver*:
-<img src="img/quadcopter_hovering_control_system.png"  width="800"  align="center">
+<img src="img/quadcopter_hovering_control_system.png"  align="center">
